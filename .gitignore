@@ -1,0 +1,30 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio folders
+.vs/
+
+# ASP.NET Core config
+appsettings.json
+
+# Log files
+*.log
+
+# NuGet packages
+*.nupkg
+packages/
+
+# Database files
+*.mdf
+*.ldf
+
+# Others
+*.bak
+*.backup
