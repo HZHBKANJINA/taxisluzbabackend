@@ -13,6 +13,7 @@ obj/
 
 # ASP.NET Core config
 appsettings.json
+appsettings.Development.json
 
 # Log files
 *.log
