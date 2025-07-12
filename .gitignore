@@ -29,3 +29,6 @@ packages/
 # Others
 *.bak
 *.backup
+
+TaxiSluzbaBackend.http
+TaxiSluzbaBackend.csproj
