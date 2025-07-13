@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaxiSluzbaBackend.Data;
 
@@ -10,9 +11,11 @@ using TaxiSluzbaBackend.Data;
 namespace TaxiSluzbaBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250712174216_PassengerOperators")]
+    partial class PassengerOperators
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -188,14 +191,6 @@ namespace TaxiSluzbaBackend.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            Email = "admin@pijacar.hr",
-                            PasswordHash = "Cz+JROeSaMyFKl/2+JiteHMu2fqwegiCVaCZl4cAESw="
-                        });
                 });
 
             modelBuilder.Entity("TaxiSluzbaBackend.Models.Vehicle", b =>

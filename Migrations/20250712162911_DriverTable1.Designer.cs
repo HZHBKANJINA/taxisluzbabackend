@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaxiSluzbaBackend.Data;
 
@@ -10,9 +11,11 @@ using TaxiSluzbaBackend.Data;
 namespace TaxiSluzbaBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250712162911_DriverTable1")]
+    partial class DriverTable1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,10 +80,10 @@ namespace TaxiSluzbaBackend.Migrations
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.Property<int?>("VehicleId")
@@ -95,77 +98,6 @@ namespace TaxiSluzbaBackend.Migrations
                     b.HasIndex("VehicleId");
 
                     b.ToTable("Drivers");
-                });
-
-            modelBuilder.Entity("TaxiSluzbaBackend.Models.Operator", b =>
-                {
-                    b.Property<int>("OperatorId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OperatorId"));
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OperatorId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Operators");
-                });
-
-            modelBuilder.Entity("TaxiSluzbaBackend.Models.Passenger", b =>
-                {
-                    b.Property<int>("PassengerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PassengerId"));
-
-                    b.Property<int?>("AddressId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PassengerId");
-
-                    b.HasIndex("AddressId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Passengers");
                 });
 
             modelBuilder.Entity("TaxiSluzbaBackend.Models.User", b =>
@@ -188,14 +120,6 @@ namespace TaxiSluzbaBackend.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            Email = "admin@pijacar.hr",
-                            PasswordHash = "Cz+JROeSaMyFKl/2+JiteHMu2fqwegiCVaCZl4cAESw="
-                        });
                 });
 
             modelBuilder.Entity("TaxiSluzbaBackend.Models.Vehicle", b =>
@@ -234,9 +158,7 @@ namespace TaxiSluzbaBackend.Migrations
 
                     b.HasOne("TaxiSluzbaBackend.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.HasOne("TaxiSluzbaBackend.Models.Vehicle", "Vehicle")
                         .WithMany()
@@ -247,34 +169,6 @@ namespace TaxiSluzbaBackend.Migrations
                     b.Navigation("User");
 
                     b.Navigation("Vehicle");
-                });
-
-            modelBuilder.Entity("TaxiSluzbaBackend.Models.Operator", b =>
-                {
-                    b.HasOne("TaxiSluzbaBackend.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("TaxiSluzbaBackend.Models.Passenger", b =>
-                {
-                    b.HasOne("TaxiSluzbaBackend.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
-
-                    b.HasOne("TaxiSluzbaBackend.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Address");
-
-                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }
